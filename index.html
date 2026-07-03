@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Reason</title>
+<title>The Reason You Didn't Make It</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -41,9 +41,10 @@
   }
   h1.title{
     font-family:'Luckiest Guy',cursive;
-    font-size:2.6rem;
+    font-size:clamp(1.5rem, 6vw, 2.3rem);
     margin:0 0 4px;
     letter-spacing:1px;
+    line-height:1.15;
     background:linear-gradient(90deg,var(--pink),var(--yellow),var(--cyan),var(--pink));
     background-size:300% 100%;
     -webkit-background-clip:text;background-clip:text;color:transparent;
@@ -140,14 +141,14 @@
   }
   .slice-label{
     position:absolute;top:50%;left:50%;
-    width:140px;margin-left:-70px;
-    transform-origin:70px 0;
+    width:120px;margin-left:-60px;
+    transform-origin:60px 0;
     text-align:center;
   }
   .slice-label span{
-    display:inline-block;margin-top:18px;font-size:.72rem;font-weight:700;
-    color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6);
-    max-width:88px;line-height:1.15;
+    display:inline-block;margin-top:52px;font-size:.8rem;font-weight:800;
+    color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7);
+    max-width:100px;line-height:1.2;
   }
   .hub{
     position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
@@ -191,7 +192,7 @@
 
   <!-- ================= ADMIN VIEW ================= -->
   <div id="admin-view">
-    <h1 class="title">🎡 THE REASON 🎡</h1>
+    <h1 class="title">🎡 THE REASON YOU DIDN'T MAKE IT 🎡</h1>
     <p class="subtitle">Game Show Setup</p>
     <div class="panel">
       <div class="note">Only send the generated link below — this page shows the fixed winner.</div>
@@ -216,7 +217,7 @@
 
   <!-- ================= CUSTOMER VIEW ================= -->
   <div id="customer-view">
-    <h1 class="title">🎡 THE REASON 🎡</h1>
+    <h1 class="title">🎡 THE REASON YOU DIDN'T MAKE IT 🎡</h1>
     <p class="subtitle">Step right up — give it a spin!</p>
     <div class="wheel-wrap" id="wheel-wrap">
       <div class="pointer"></div>
@@ -233,7 +234,7 @@
 
   <!-- ================= ERROR VIEW ================= -->
   <div id="error-view">
-    <h1 class="title">🎡 THE REASON 🎡</h1>
+    <h1 class="title">🎡 THE REASON YOU DIDN'T MAKE IT 🎡</h1>
     <p>This link is broken or incomplete. Ask whoever sent it for a fresh one.</p>
   </div>
 
@@ -368,7 +369,9 @@
       label.style.transform = `rotate(${center}deg)`;
       const span = document.createElement('span');
       span.textContent = text;
-      span.style.transform = `rotate(${-center}deg)`;
+      // flip text right-side-up for slices on the bottom half of the wheel
+      const flip = (center > 90 && center < 270) ? 180 : 0;
+      span.style.transform = `rotate(${flip}deg)`;
       span.style.display = 'inline-block';
       label.appendChild(span);
       wheel.appendChild(label);
